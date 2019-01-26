@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody _rb;
     private CapsuleCollider _cc;
-    private bool _grounded = false;
+    public bool _grounded = false;
     private bool _justJumped = false;
     private bool _doubleJump = false;
     private bool _blockAnimation = false;
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
         point1 += Vector3.up * RayLenght * 0.5f;
         point2 += Vector3.up * RayLenght * 0.5f;
         float _moveX;
-        if (Physics.CapsuleCast(point1, point2, _cc.radius, transform.TransformDirection(Vector3.down), out hit, RayLenght) && !_justJumped)
+        if (Physics.CapsuleCast(point1, point2, _cc.radius, transform.TransformDirection(Vector3.down), out hit, RayLenght) && !_blockAnimation)
         {
             _grounded = true;
             if (_animator.GetBool("Jumping") && !_blockAnimation)
@@ -50,8 +50,11 @@ public class PlayerController : MonoBehaviour
                 _animator.SetBool("DoubleJump", false);
             }
         }
-        Debug.DrawRay(feet.position, Vector3.down* AnimationRayLenght, Color.blue,0);
-        if(Physics.Raycast(feet.position, Vector3.down, out hit, AnimationRayLenght))
+        point1 = transform.position + _cc.center + Vector3.up * (_cc.height / 2 - _cc.radius);
+        point2 = point1 - Vector3.up * (_cc.height - 2 * _cc.radius);
+        point1 += Vector3.up * AnimationRayLenght * 0.5f;
+        point2 += Vector3.up * AnimationRayLenght * 0.5f;
+        if (Physics.CapsuleCast(point1, point2, _cc.radius, transform.TransformDirection(Vector3.down), out hit, AnimationRayLenght))
         {
             if (_animator.GetBool("Jumping") && !_blockAnimation)
             {
