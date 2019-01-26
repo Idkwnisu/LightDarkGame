@@ -71,6 +71,14 @@
     <Compile Include="Assets\Scripts\RoomsManager.cs" />
     <Compile Include="Assets\Scripts\SafeSpot.cs" />
     <Compile Include="Assets\Scripts\StartCycle.cs" />
+    <Compile Include="Assets\StarNestSkybox\Scripts\CameraScroll.cs" />
+    <Compile Include="Assets\StarNestSkybox\Scripts\SkyboxSwitcher.cs" />
+    <None Include="Assets\StarNestSkybox\StarNestSkyboxReadme.txt" />
+    <None Include="Assets\StarNestSkybox\StarNestSkybox_HSV.shader" />
+    <None Include="Assets\StarNestSkybox\StarNestSkyboxMask.shader" />
+    <None Include="Assets\StarNestSkybox\hsv.cginc" />
+    <None Include="Assets\StarNestSkybox\StarNestSkybox.shader" />
+    <None Include="Assets\StarNestSkybox\StarNest.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/stefa/GGJ2019/LightDarkGame/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
