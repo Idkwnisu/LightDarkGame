@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     public float FallingGravity;
     public Transform feet;
+    public Transform feetMesh;
+
+    private Transform feetMeshNoJump;
     
 
     private Rigidbody _rb;
@@ -28,6 +31,7 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _cc = GetComponent<CapsuleCollider>();
         _animator = GetComponent<Animator>();
+        feetMeshNoJump = feetMesh;
     }
 
     // Update is called once per frame
@@ -85,6 +89,7 @@ public class PlayerController : MonoBehaviour
                     Invoke("EndJump", 0.5f);
                     _animator.SetBool("Jumping", true);
                 }
+                _rb.velocity = Vector3.zero + Vector3.right * _rb.velocity.x;
                 _rb.AddForce(Vector3.up * jumpForce);
             }
             
