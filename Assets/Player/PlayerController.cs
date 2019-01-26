@@ -125,6 +125,14 @@ public class PlayerController : MonoBehaviour
         }
 
         _rb.AddForce(Physics.gravity * Time.deltaTime * 100 * _gravity * (_rb.mass * _rb.mass));
+
+        if(_moveX == 0)
+        {
+            if(Mathf.Abs(_rb.velocity.x) > 0.1f)
+            {
+                _rb.velocity = new Vector3(_rb.velocity.x / 3.0f, _rb.velocity.y, _rb.velocity.z);
+            }
+        }
     }
 
     public void EndJump()
