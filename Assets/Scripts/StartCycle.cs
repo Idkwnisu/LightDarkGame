@@ -18,7 +18,7 @@ public class StartCycle : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        DarkCycleManager.instance.StartCycle();
+        DarkCycleDegrading.instance.StartCycle();
         Destroy(gameObject);
     }
 }

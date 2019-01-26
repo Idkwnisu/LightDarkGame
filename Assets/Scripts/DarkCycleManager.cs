@@ -43,14 +43,18 @@ public class DarkCycleManager : MonoBehaviour
     public void StartCycle()
     {
         Invoke("Night", nightTime);
-        player.GetComponent<MeshRenderer>().material = lightMat;
+        player.GetComponent<SkinnedMeshRenderer>().material = lightMat;
 
     }
 
     public void Light()
     {
         _light = true;
-        player.GetComponent<MeshRenderer>().material = lightMat;
+        player.GetComponent<SkinnedMeshRenderer>().material = lightMat;
+        if(_danger)
+        {
+            CancelInvoke();
+        }
         Invoke("Night", lightTime);
         _danger = false;
     }
@@ -60,7 +64,7 @@ public class DarkCycleManager : MonoBehaviour
         if(!_safe)
         {
             Debug.Log("Game over here");
-            player.GetComponent<MeshRenderer>().material = deadMat;
+            player.GetComponent<SkinnedMeshRenderer>().material = deadMat;
 
         }
     }
@@ -70,13 +74,13 @@ public class DarkCycleManager : MonoBehaviour
         _light = false;
         if (_safe)
         {
-            player.GetComponent<MeshRenderer>().material = nightMat;
+            player.GetComponent<SkinnedMeshRenderer>().material = nightMat;
 
             Invoke("Light", nightTime);
         }
         else
         {
-            player.GetComponent<MeshRenderer>().material = dangerMat;
+            player.GetComponent<SkinnedMeshRenderer>().material = dangerMat;
 
             Invoke("Die", dieTime);
             _danger = true;
@@ -96,7 +100,7 @@ public class DarkCycleManager : MonoBehaviour
         {
             CancelInvoke();
             Invoke("Night", nightTime);
-            player.GetComponent<MeshRenderer>().material = nightMat;
+            player.GetComponent<SkinnedMeshRenderer>().material = nightMat;
 
         }
     }
@@ -108,7 +112,7 @@ public class DarkCycleManager : MonoBehaviour
         {
             Invoke("Die", dieTime);
             _danger = true;
-            player.GetComponent<MeshRenderer>().material = dangerMat;
+            player.GetComponent<SkinnedMeshRenderer>().material = dangerMat;
 
         }
     }

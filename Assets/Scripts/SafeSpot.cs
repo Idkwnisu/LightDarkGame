@@ -18,12 +18,11 @@ public class SafeSpot : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        DarkCycleManager.instance.Safe();
+        DarkCycleDegrading.instance.Safe();
     }
 
     private void OnTriggerExit(Collider other)
     {
-        DarkCycleManager.instance.Unsafe();
-        other.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        DarkCycleDegrading.instance.Unsafe();
     }
 }
