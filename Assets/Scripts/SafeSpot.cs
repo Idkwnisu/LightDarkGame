@@ -18,11 +18,17 @@ public class SafeSpot : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        DarkCycleDegrading.instance.Safe();
+        if (other.CompareTag("Player"))
+        {
+            DarkCycleDegrading.instance.Safe();
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        DarkCycleDegrading.instance.Unsafe();
+        if (other.CompareTag("Player"))
+        {
+            DarkCycleDegrading.instance.Unsafe();
+        }
     }
 }

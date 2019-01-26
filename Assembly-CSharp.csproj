@@ -60,12 +60,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\DayNightObj.cs" />
     <Compile Include="Assets\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\CarpetUpDown.cs" />
     <Compile Include="Assets\Scripts\DarkCycleDegrading.cs" />
-    <Compile Include="Assets\Scripts\DarkCycleManager.cs" />
     <Compile Include="Assets\Scripts\NewCameraScript\CameraManager.cs" />
+    <Compile Include="Assets\Scripts\NightCycle.cs" />
     <Compile Include="Assets\Scripts\OpenDrawer.cs" />
     <Compile Include="Assets\Scripts\RoomsManager.cs" />
     <Compile Include="Assets\Scripts\SafeSpot.cs" />

@@ -18,13 +18,17 @@ public class DarkCycleDegrading : MonoBehaviour
     public float nightTime;
     public float dieTime;
 
-    //////temp///////
-    public GameObject player;
-    public Material lightMat;
-    public Material nightMat;
-    public Material dangerMat;
+    public PlayerController player;
+
+    public GameObject[] firstStep;
+    public GameObject[] secondStep;
+    public GameObject[] thirdStep;
+    public GameObject[] fourthStep;
+
     public Image image;
-    //////temp///////
+
+
+
     private void Awake()
     {
 
@@ -45,6 +49,34 @@ public class DarkCycleDegrading : MonoBehaviour
         if(_danger)
         {
             sanity -= degradingRate * Time.deltaTime;
+            if (sanity < 80)
+            {
+                for (int i = 0; i < firstStep.Length; i++)
+                {
+                    firstStep[i].GetComponent<DayNightObj>().Night();
+                }
+            }
+            if (sanity < 60)
+            {
+                for (int i = 0; i < secondStep.Length; i++)
+                {
+                    secondStep[i].GetComponent<DayNightObj>().Night();
+                }
+            }
+            if (sanity < 40)
+            {
+                for (int i = 0; i < thirdStep.Length; i++)
+                {
+                    thirdStep[i].GetComponent<DayNightObj>().Night();
+                }
+            }
+            if (sanity < 20)
+            {
+                for (int i = 0; i < fourthStep.Length; i++)
+                {
+                    fourthStep[i].GetComponent<DayNightObj>().Night();
+                }
+            }
             image.color = new Color(sanity / 100, sanity / 100, sanity / 100);
         }
     }
@@ -52,38 +84,75 @@ public class DarkCycleDegrading : MonoBehaviour
     public void StartCycle()
     {
         Invoke("Night", nightTime);
-        player.GetComponent<SkinnedMeshRenderer>().material = lightMat;
-
     }
 
     public void Light()
     {
+        player.controlsEnabled = true;
         _light = true;
-        player.GetComponent<SkinnedMeshRenderer>().material = lightMat;
         if(_danger)
         {
             CancelInvoke();
         }
-        Invoke("Night", lightTime);
         _danger = false;
+        for(int i = 0; i < firstStep.Length; i++)
+        {
+            firstStep[i].GetComponent<DayNightObj>().Day();
+        }
+        for (int i = 0; i < secondStep.Length; i++)
+        {
+            secondStep[i].GetComponent<DayNightObj>().Day();
+        }
+        for (int i = 0; i < thirdStep.Length; i++)
+        {
+            thirdStep[i].GetComponent<DayNightObj>().Day();
+        }
+        for (int i = 0; i < fourthStep.Length; i++)
+        {
+            fourthStep[i].GetComponent<DayNightObj>().Day();
+        }
     }
 
     public void Night()
     {
         _light = false;
-        if (_safe)
+        if(sanity < 80)
         {
-            player.GetComponent<SkinnedMeshRenderer>().material = nightMat;
-
-            Invoke("Light", nightTime);
+            for(int i = 0; i < firstStep.Length; i++)
+            {
+                firstStep[i].GetComponent<DayNightObj>().Night();
+            }
+        }
+        if(sanity < 60)
+        {
+            for (int i = 0; i < secondStep.Length; i++)
+            {
+                secondStep[i].GetComponent<DayNightObj>().Night();
+            }
+        }
+        if(sanity < 40)
+        {
+            for (int i = 0; i < thirdStep.Length; i++)
+            {
+                thirdStep[i].GetComponent<DayNightObj>().Night();
+            }
+        }
+        if(sanity < 20)
+        {
+            for (int i = 0; i < fourthStep.Length; i++)
+            {
+                fourthStep[i].GetComponent<DayNightObj>().Night();
+            }
+        }
+        if(!_safe)
+        {
+            _danger = true;
         }
         else
         {
-            player.GetComponent<SkinnedMeshRenderer>().material = dangerMat;
-
-            _danger = true;
+            player.Stop();
+            player.controlsEnabled = false;
         }
-
     }
 
     public void ToggleLight()
@@ -97,15 +166,9 @@ public class DarkCycleDegrading : MonoBehaviour
 
         if(_danger)
         {
-            CancelInvoke();
+            player.Stop();
+            player.controlsEnabled = false;
             _danger = false;
-            Invoke("Night", nightTime);
-            player.GetComponent<SkinnedMeshRenderer>().material = nightMat;
-
-        }
-        if(!_light)
-        {
-            Invoke("Light", nightTime);
         }
     }
 
@@ -115,10 +178,16 @@ public class DarkCycleDegrading : MonoBehaviour
         if(!_light)
         {
             _danger = true;
-            player.GetComponent<SkinnedMeshRenderer>().material = dangerMat;
-
         }
     }
 
+    public bool isLight()
+    {
+        return _light;
+    }
 
+    public bool isSafe()
+    {
+        return _safe;
+    }
 }
