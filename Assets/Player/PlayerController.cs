@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatformMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public float speed;
     public float maxSpeed;
@@ -25,7 +25,7 @@ public class PlatformMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         RaycastHit hit;
         Vector3 point1 = transform.position + _cc.center + Vector3.up * (_cc.height / 2 - _cc.radius);

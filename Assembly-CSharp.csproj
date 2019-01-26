@@ -60,7 +60,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\PlatformMovement.cs" />
+    <Compile Include="Assets\Player\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\DarkCycleManager.cs" />
+    <Compile Include="Assets\Scripts\SafeSpot.cs" />
+    <Compile Include="Assets\Scripts\StartCycle.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/stefa/GGJ2019/LightDarkGame/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
