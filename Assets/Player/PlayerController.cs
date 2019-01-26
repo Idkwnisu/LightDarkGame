@@ -7,14 +7,18 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public float maxSpeed;
     public float RayLenght;
+    public float AnimationRayLenght;
     public float jumpForce;
     public float FallingGravity;
+    public Transform feet;
     
 
     private Rigidbody _rb;
     private CapsuleCollider _cc;
     private bool _grounded = false;
     private bool _justJumped = false;
+    private bool _doubleJump = false;
+    private bool _blockAnimation = false;
     private float _gravity = 1;
     private Animator _animator;
 
@@ -38,12 +42,26 @@ public class PlayerController : MonoBehaviour
         if (Physics.CapsuleCast(point1, point2, _cc.radius, transform.TransformDirection(Vector3.down), out hit, RayLenght) && !_justJumped)
         {
             _grounded = true;
-            if(_animator.GetBool("Jumping"))
+            if (_animator.GetBool("Jumping") && !_blockAnimation)
             {
+                _justJumped = false;
+                _doubleJump = false;
                 _animator.SetBool("Jumping", false);
+                _animator.SetBool("DoubleJump", false);
             }
         }
-        if(_grounded)
+        Debug.DrawRay(feet.position, Vector3.down* AnimationRayLenght, Color.blue,0);
+        if(Physics.Raycast(feet.position, Vector3.down, out hit, AnimationRayLenght))
+        {
+            if (_animator.GetBool("Jumping") && !_blockAnimation)
+            {
+                _justJumped = false;
+                _doubleJump = false;
+                _animator.SetBool("Jumping", false);
+                _animator.SetBool("DoubleJump", false);
+            }
+        }
+        if(_grounded || _justJumped)
         {
         _moveX = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
         _rb.AddForce(_moveX * Vector3.right);
@@ -51,15 +69,29 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButtonDown("Jump"))
             {
                 _grounded = false;
-                _justJumped = true;
-                _animator.SetBool("Jumping", true);
-                Invoke("EndJump", 0.5f);
+                if (_justJumped)
+                {
+                    _doubleJump = true;
+                    _justJumped = false;
+                    _animator.SetBool("DoubleJump", true);
+                }
+                else
+                {
+                    _justJumped = true;
+                    _blockAnimation = true;
+                    Invoke("EndJump", 0.5f);
+                    _animator.SetBool("Jumping", true);
+                }
                 _rb.AddForce(Vector3.up * jumpForce);
             }
+            
             transform.LookAt(transform.position + Vector3.right*_moveX);
         }
         else
         {
+             _animator.SetBool("DoubleJump", false);
+
+
             _moveX = Input.GetAxis("Horizontal") * speed/5 * Time.deltaTime;
             _rb.AddForce(_moveX * Vector3.right);
         }
@@ -94,7 +126,7 @@ public class PlayerController : MonoBehaviour
 
     public void EndJump()
     {
-        _justJumped = false;
+        _blockAnimation = false;
     }
 
     private void OnCollisionEnter(Collision collision)

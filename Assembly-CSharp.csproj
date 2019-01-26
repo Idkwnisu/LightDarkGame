@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\DarkCycleDegrading.cs" />
     <Compile Include="Assets\Scripts\DarkCycleManager.cs" />
+    <Compile Include="Assets\Scripts\OpenDrawer.cs" />
     <Compile Include="Assets\Scripts\SafeSpot.cs" />
     <Compile Include="Assets\Scripts\StartCycle.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
