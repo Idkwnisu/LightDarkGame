@@ -45,7 +45,7 @@ public class OpenDrawer : MonoBehaviour
         {
             arrived = false;
         }
-        transform.localScale = Vector3.Lerp(transform.localScale, scaleTarget, ratio);
+        //transform.localScale = Vector3.Lerp(transform.localScale, scaleTarget, ratio);
     }
 
     public void Toggle()

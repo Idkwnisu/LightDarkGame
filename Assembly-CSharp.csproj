@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\DayNightObj.cs" />
+    <Compile Include="Assets\Manager.cs" />
     <Compile Include="Assets\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\CarpetUpDown.cs" />
