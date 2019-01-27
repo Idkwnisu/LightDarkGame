@@ -71,7 +71,7 @@ public class Manager : MonoBehaviour
     {
         if(buttonEnabled)
         {
-            SceneManager.LoadScene("SampleScene");   
+            SceneManager.LoadScene("Instructions");   
         }
     }
 }

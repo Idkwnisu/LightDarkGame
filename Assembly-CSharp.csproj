@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\StartCycle.cs" />
     <Compile Include="Assets\StarNestSkybox\Scripts\CameraScroll.cs" />
     <Compile Include="Assets\StarNestSkybox\Scripts\SkyboxSwitcher.cs" />
+    <Compile Include="Assets\StartGame.cs" />
     <None Include="Assets\StarNestSkybox\StarNestSkyboxReadme.txt" />
     <None Include="Assets\StarNestSkybox\StarNestSkybox_HSV.shader" />
     <None Include="Assets\StarNestSkybox\StarNestSkyboxMask.shader" />

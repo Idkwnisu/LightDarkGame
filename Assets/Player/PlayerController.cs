@@ -144,6 +144,10 @@ public class PlayerController : MonoBehaviour
             {
                 _rb.velocity = new Vector3(_rb.velocity.x / 3.0f, _rb.velocity.y, _rb.velocity.z);
             }
+            else
+            {
+                _rb.velocity = new Vector3(0, _rb.velocity.y, _rb.velocity.z);
+            }
         }
     }
 
